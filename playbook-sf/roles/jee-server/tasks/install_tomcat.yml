@@ -21,7 +21,7 @@
   file: path={{tomcat_home}} owner=tomcat group=tomcat state=directory recurse=yes
 
 - name: Prepare configuration directory
-  file: path={{tomcat_home}}/conf/ state=present state=directory mode=0755
+  file: path={{tomcat_home}}/conf/ state=directory mode=0755
 
 - name: Configure Tomcat server
   template: src=server.xml dest={{tomcat_home}}/conf/ 
@@ -35,3 +35,10 @@
 - name: Install Tomcat init script
   template: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
   notify: restart tomcat
+
+# Allow all access to tcp port http and https
+- name: Open http port
+  ufw: rule=allow port={{http_port}} proto=tcp
+
+- name: Open https port
+  ufw: rule=allow port={{https_port}} proto=tcp
