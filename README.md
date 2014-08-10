@@ -11,9 +11,9 @@ This is presummably not was you want to do on a production server.
 
 Please feel free to adapt this script to you needs and contribute if you mind.
 
-This playbook has been tested on a Precise64 box.
+This playbook has been tested on a Precise64 box (Vagrant image).
 
-Prerequisites : Ansible, Ubuntu (vagrant image precise64)
+Prerequisites : Ansible 1.6+, Ubuntu 12+ 
 
 ### Run playbook
 
@@ -23,6 +23,15 @@ Login to the server
 $ ansible-playbook -i site-inventory site.yml </code></pre>
 
 Restart of the server when jenkins is installed may take a while.
+
+### Access Software Factory 
+
+URLs:
+- Tomcat Manager : http:<yourserver>:8080/
+- Gitblit : http:<yourserver>:8080/gitblit
+- Nexus : http:<yourserver>:8080/nexus
+- Jenkins : http:<yourserver>:8080/jenkins
+
 
 ### Remote execution
 
