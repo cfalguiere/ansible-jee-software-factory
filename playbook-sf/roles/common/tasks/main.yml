@@ -1,0 +1,22 @@
+---
+# Create a user 
+
+- name: Setup | create group
+  group: gid={{ service_id }} name={{ service_name }} state=present
+
+- name: Setup | create user
+  user: name={{ service_name }}  group={{ service_name }} 
+    home=/usr/share/{{ service_name }} 
+    shell=/bin/bash 
+    uid={{ service_id }} 
+    state=present
+  
+- name: Setup | set user password
+  shell: usermod -p $(echo '{{ service_name }}' | openssl passwd -1 -stdin) {{ service_name }}
+  
+- name: Sudoers | update sudoers file and validate
+  lineinfile: "dest=/etc/sudoers
+    insertafter=EOF
+    line='{{ service_name }} ALL=(ALL) NOPASSWD: ALL'
+    regexp='{{ service_name }} ALL=(ALL) NOPASSWD: ALL'
+    state=present"

@@ -1,0 +1,12 @@
+---
+# this playbook ...
+
+- hosts: software-factory
+  connection: local
+  sudo: True
+  user: root
+  roles:
+     - common
+
+
+

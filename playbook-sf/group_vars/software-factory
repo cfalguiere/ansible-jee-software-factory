@@ -1,0 +1,20 @@
+# Les variables associees au groupe tomcat-servers
+
+http_port: 8080
+https_port: 8443
+
+# This will configure a default manager-gui user:
+
+admin_username: admin
+admin_password: adminsecret
+
+service_name: tomcat
+service_id: 2000 
+
+tomcat_version: 7.0.52
+tomcat_bundle_name: apache-tomcat-{{tomcat_version}}
+tomcat_download_url: http://precise64/repo/{{tomcat_bundle_name}}.tar.gz   
+tomcat_home: /opt/apache-tomcat-{{tomcat_version}}
+
+nexus_deployment_username: deployment
+nexus_deployment_password: deployment123
