@@ -32,3 +32,7 @@ Depending you ssh configuration, you may have to add some key to the user create
 
 <pre><code- name: ssh config for tomcat
   authorized_key: user={{ service_name }} key="{{ lookup('file', '/home/vagrant/.ssh/id_rsa.pub') }}"</code></pre>
+
+### Ansible
+
+[Ansible](http://www.ansible.com/home)
