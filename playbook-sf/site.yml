@@ -9,4 +9,11 @@
      - common
 
 
+- hosts: software-factory
+  connection: local
+  sudo: True
+  user: tomcat
+  roles:
+     - maven
+
 

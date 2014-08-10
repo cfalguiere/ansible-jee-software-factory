@@ -1,0 +1,9 @@
+- name: Install maven
+  apt: pkg=maven state=present
+
+- name: Create user's settings directory
+  file: path=/usr/share/tomcat/.m2  owner={{ service_name }} group={{ service_name }} state=directory
+
+- name: Create user's settings
+  template: src=m2_settings.j2 dest=/usr/share/tomcat/.m2/settings.xml owner={{ service_name }} group={{ service_name }} mode=644
+

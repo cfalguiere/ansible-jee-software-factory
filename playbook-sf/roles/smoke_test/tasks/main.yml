@@ -1,0 +1,31 @@
+# jee server smoke tests
+
+- name: check tomcat manager
+  local_action: shell wget -q -O- http://{{ inventory_hostname }}:{{ http_port }}
+  register: content_out
+  until:  "'successfully installed Tomcat' in content_out.stdout" 
+  retries: 5
+  delay: 10
+
+- name: check gitblit
+  local_action: shell wget -q -O- http://{{ inventory_hostname }}:{{ http_port }}/gitblit
+  register: content_out
+  until:  "'Welcome to Gitblit' in content_out.stdout" 
+  retries: 5
+  delay: 10
+
+- name: check nexus
+  local_action: shell wget -q -O- http://{{ inventory_hostname }}:{{ http_port }}/nexus
+  register: content_out
+  until:  "'Sonatype Nexus' in content_out.stdout" 
+  retries: 5
+  delay: 10
+
+- name: check jenkins
+  local_action: shell wget -q -O- http://{{ inventory_hostname }}:{{ http_port }}/jenkins
+  register: content_out
+  until:  "'Dashboard [Jenkins]' in content_out.stdout" 
+  retries: 5
+  delay: 10
+
+
