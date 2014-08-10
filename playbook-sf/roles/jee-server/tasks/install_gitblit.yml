@@ -1,0 +1,16 @@
+---
+# install Gitblit in tomcat
+
+- name: Lookup gitblit variables
+  include_vars: gitblit.yml
+
+- name: Download Gitblit
+  local_action: get_url url={{ gitblit.download_url }}
+           dest=/tmp/gitblit.war  force=no
+
+- name: Install Gitblit war
+  copy: src=/tmp/gitblit.war 
+    dest={{tomcat_home}}/webapps/gitblit.war 
+    force=yes owner=tomcat group=tomcat 
+  notify: restart tomcat
+
