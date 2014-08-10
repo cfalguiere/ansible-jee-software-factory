@@ -1,0 +1,27 @@
+# {{ ansible_managed }}
+
+<html>
+<body>
+
+<h1>DEVO</h1>
+
+<h2>Software Factory</h2>
+<ul>
+{% for host in groups['software-factory'] %}
+<li>
+<a href="http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:8080">tomcat home page sur {{ host }}</a>
+</li>
+<li>
+<a href="http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:8080/gitblit">gitblit sur {{ host }}</a>
+</li>
+<li>
+<a href="http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:8080/jenkins">jenkins sur {{ host }}</a>
+</li>
+<li>
+<a href="http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:8080/nexus">nexus sur {{ host }}</a>
+</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>

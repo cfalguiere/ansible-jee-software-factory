@@ -1,20 +1,26 @@
-# Les variables associees au groupe tomcat-servers
+# This file sets all variables associated with group softwarefactory
 
+
+# This will create to create unix user named tomcat in group tomcat with password set to tomcat and id set to 2000
+# If you change the name, please also change the user in site.yml
+service_name: tomcat
+service_id: 2000 
+
+# This will set tomcat's HTTP port to 8080 and HTTPS port to 8443
 http_port: 8080
 https_port: 8443
 
 # This will configure a default manager-gui user:
-
 admin_username: admin
 admin_password: adminsecret
 
-service_name: tomcat
-service_id: 2000 
-
-tomcat_version: 7.0.52
-tomcat_bundle_name: apache-tomcat-{{tomcat_version}}
-tomcat_download_url: http://precise64/repo/{{tomcat_bundle_name}}.tar.gz   
-tomcat_home: /opt/apache-tomcat-{{tomcat_version}}
-
+# This will configure the nexus user
 nexus_deployment_username: deployment
 nexus_deployment_password: deployment123
+
+# This defines tomcat version and download url
+tomcat_version: 7.0.55
+tomcat_bundle_name: apache-tomcat-7.0.55
+tomcat_download_url: http://www.motorlogy.com/apache/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz
+tomcat_home: /opt/apache-tomcat-7.0.55
+

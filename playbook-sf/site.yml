@@ -16,7 +16,7 @@
   roles:
      - maven
      - git
-#     - jee-server
+     - jee-server
 #     - smoke_test
 
 

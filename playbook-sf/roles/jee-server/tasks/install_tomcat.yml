@@ -1,0 +1,37 @@
+---
+# install tomcat
+
+- name: Install Java 1.7
+  apt: pkg=openjdk-7-jdk state=present
+
+- name: env
+  debug: msg="version={{tomcat_version}} bundle name={{tomcat_bundle_name}} tomcat_home={{tomcat_home}}"
+
+- name: Download Tomcat
+  get_url: url={{tomcat_download_url}}  
+           dest=/tmp/{{tomcat_bundle_name}}.tar.gz
+
+- name: Extract archive
+  sudo: true
+  command: chdir=/opt 
+           /bin/tar xvf /tmp/{{tomcat_bundle_name}}.tar.gz 
+           creates={{tomcat_home}}
+ 
+- name: Change ownership of Tomcat installation
+  file: path={{tomcat_home}} owner=tomcat group=tomcat state=directory recurse=yes
+
+- name: Prepare configuration directory
+  file: path={{tomcat_home}}/conf/ state=present state=directory mode=0755
+
+- name: Configure Tomcat server
+  template: src=server.xml dest={{tomcat_home}}/conf/ 
+
+- name: Configure Tomcat users
+  template: src=tomcat-users.xml dest={{tomcat_home}}/conf/
+
+#- name: Symlink install directory
+#  file: src={{tomcat_home}} path=/usr/share/tomcat state=link
+
+- name: Install Tomcat init script
+  template: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+  notify: restart tomcat

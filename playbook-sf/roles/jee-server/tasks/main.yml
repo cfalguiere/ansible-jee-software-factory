@@ -1,0 +1,24 @@
+---
+# install tomcat 7
+
+
+- include: install_tomcat.yml
+#- include: install_nexus.yml
+#- include: install_gitblit.yml
+#- include: install_jenkins.yml
+
+- name: Start Tomcat
+  service: name=tomcat state=restarted enabled=yes
+  sudo: true
+
+#- name: deploy iptables rules
+#  #template: src=iptables-save dest=/etc/sysconfig/iptables
+#  template: src=iptables-save dest=/etc/iptables.rules
+#  notify: restart iptables
+
+- name: wait for tomcat to start
+  wait_for: port={{http_port}} timeout=60 delay=10
+
+- name: generate index page
+  local_action: template src=index_page.j2 dest=/var/www/index_software_factory.html owner=www-data group=www-data mode=644
+  sudo: true
