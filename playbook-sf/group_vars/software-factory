@@ -18,9 +18,5 @@ admin_password: adminsecret
 nexus_deployment_username: deployment
 nexus_deployment_password: deployment123
 
-# This defines tomcat version and download url
+# Defines Tomcat version. Used in tomcat.yml
 tomcat_version: 7.0.55
-tomcat_bundle_name: apache-tomcat-7.0.55
-tomcat_download_url: http://www.motorlogy.com/apache/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz
-tomcat_home: /opt/apache-tomcat-7.0.55
-

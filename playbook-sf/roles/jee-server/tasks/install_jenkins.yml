@@ -4,13 +4,16 @@
 - name: Lookup jenkins variables
   include_vars: jenkins.yml
 
+- name: Lookup tomcat variables
+  include_vars: tomcat.yml
+
 - name: Download Jenkins
   local_action: get_url url={{ jenkins.download_url }}   
            dest=/tmp/jenkins.war  force=no
 
 - name: Install Jenkins war
   copy: src=/tmp/jenkins.war 
-    dest={{tomcat_home}}/webapps/jenkins.war 
+    dest={{tomcat.home}}/webapps/jenkins.war 
     force=no owner=tomcat group=tomcat 
   notify: restart tomcat
 
@@ -34,11 +37,11 @@
   delay: 10
 
 - name: wait until jenkins is installed
-  wait_for: path={{tomcat_home}}/webapps/jenkins/WEB-INF/plugins/cvs.hpi state=present timeout=60
+  wait_for: path={{tomcat.home}}/webapps/jenkins/WEB-INF/plugins/cvs.hpi state=present timeout=60
 
 - name: Install git plugin
   copy: src=/tmp/{{ item }}  
-    dest={{tomcat_home}}/webapps/jenkins/WEB-INF/plugins/{{ item }} 
+    dest={{tomcat.home}}/webapps/jenkins/WEB-INF/plugins/{{ item }} 
     force=no owner=tomcat group=tomcat 
   with_items: jenkins_plugins
   notify: restart tomcat

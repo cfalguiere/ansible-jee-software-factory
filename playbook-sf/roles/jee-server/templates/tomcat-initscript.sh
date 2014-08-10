@@ -25,10 +25,10 @@ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre/ #TODO /etc/environment
 export PATH=$JAVA_HOME/bin:$PATH
  
 #CATALINA_HOME is the location of the bin files of Tomcat  
-export CATALINA_HOME={{tomcat_home}}
+export CATALINA_HOME={{tomcat.home}}
  
 #CATALINA_BASE is the location of the configuration files of this instance of Tomcat
-export CATALINA_BASE={{tomcat_home}}
+export CATALINA_BASE={{tomcat.home}}
  
 #TOMCAT_USER is the default user of tomcat
 export TOMCAT_USER={{service_name}}

@@ -4,13 +4,16 @@
 - name: Lookup nexus variables
   include_vars: nexus.yml
 
+- name: Lookup tomcat variables
+  include_vars: tomcat.yml
+
 - name: Download Nexus
   local_action: get_url url={{ nexus.download_url }}   
            dest=/tmp/nexus.war  force=no
 
 - name: Install Nexus war
   copy: src=/tmp/nexus.war
-    dest={{tomcat_home}}/webapps/nexus.war 
+    dest={{tomcat.home}}/webapps/nexus.war 
     force=no  owner=tomcat group=tomcat 
   notify: restart tomcat
    

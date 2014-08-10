@@ -1,0 +1,6 @@
+# This defines tomcat version and download url
+tomcat:
+  bundle_name: apache-tomcat-{{tomcat_version}}
+  download_url: http://www.motorlogy.com/apache/tomcat/tomcat-7/v{{tomcat_version}}/bin/apache-tomcat-{{tomcat_version}}.tar.gz
+  home: /opt/apache-tomcat-{{tomcat_version}}
+
