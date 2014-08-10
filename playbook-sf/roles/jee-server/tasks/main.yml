@@ -4,7 +4,7 @@
 
 - include: install_tomcat.yml
 - include: install_gitblit.yml
-#- include: install_nexus.yml
+- include: install_nexus.yml
 #- include: install_jenkins.yml
 
 - name: Start Tomcat

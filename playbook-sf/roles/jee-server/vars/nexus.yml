@@ -1,0 +1,2 @@
+nexus:
+    download_url: http://central.maven.org/maven2/org/sonatype/nexus/nexus-webapp/2.7.2-03/nexus-webapp-2.7.2-03.war
