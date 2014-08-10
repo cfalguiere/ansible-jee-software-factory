@@ -17,6 +17,6 @@
      - maven
      - git
      - jee-server
-#     - smoke_test
+     - smoke_test
 
 
