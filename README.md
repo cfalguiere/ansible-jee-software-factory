@@ -1,4 +1,5 @@
 ansible-jee-software-factory
 ============================
 
-Jenkins + Gitblit + Nexus in a Tomcat server
+Ansible Playbook 
+Installs Jenkins + Gitblit + Nexus in a Tomcat server
