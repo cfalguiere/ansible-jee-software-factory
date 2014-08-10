@@ -1,0 +1,5 @@
+TODO
+
+- Move Tomcat configuration into jee_server/vars
+- Use tomcat_version to build other variables
+
