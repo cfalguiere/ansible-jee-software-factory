@@ -1,0 +1,44 @@
+---
+# install jenkins in tomcat
+
+- name: Lookup jenkins variables
+  include_vars: jenkins.yml
+
+- name: Download Jenkins
+  local_action: get_url url={{ jenkins.download_url }}   
+           dest=/tmp/jenkins.war  force=no
+
+- name: Install Jenkins war
+  copy: src=/tmp/jenkins.war 
+    dest={{tomcat_home}}/webapps/jenkins.war 
+    force=no owner=tomcat group=tomcat 
+  notify: restart tomcat
+
+- name: Start Tomcat
+  service: name=tomcat state=restarted enabled=yes
+  sudo: true
+
+- name: wait for tomcat to start
+  wait_for: port={{http_port}} timeout=60 delay=10
+
+- name: Download plugins
+  local_action: get_url url=https://updates.jenkins-ci.org/latest/{{ item }}    
+           dest=/tmp/{{ item }}    force=no
+  with_items: jenkins_plugins
+
+- name: check jenkins
+  local_action: shell wget -O- http://{{ inventory_hostname }}:{{ http_port }}/jenkins
+  register: content_out
+  until:  "'Dashboard [Jenkins]' in content_out.stdout" 
+  retries: 10
+  delay: 10
+
+- name: wait until jenkins is installed
+  wait_for: path={{tomcat_home}}/webapps/jenkins/WEB-INF/plugins/cvs.hpi state=present timeout=60
+
+- name: Install git plugin
+  copy: src=/tmp/{{ item }}  
+    dest={{tomcat_home}}/webapps/jenkins/WEB-INF/plugins/{{ item }} 
+    force=no owner=tomcat group=tomcat 
+  with_items: jenkins_plugins
+  notify: restart tomcat

@@ -1,0 +1,8 @@
+jenkins:
+    download_url: http://mirrors.jenkins-ci.org/war/latest/jenkins.war
+jenkins_plugins:
+    - git.hpi
+    - git-client.hpi
+    - scm-api.hpi
+    - ssh-credentials.hpi
+    - credentials.hpi
