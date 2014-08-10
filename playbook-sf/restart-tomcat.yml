@@ -1,0 +1,8 @@
+# restart tomcat
+
+- hosts: platform_app_server
+  remote_user: tomcat
+  sudo: true
+  tasks:
+    - service: name=tomcat state=restarted enabled=yes
+ 
