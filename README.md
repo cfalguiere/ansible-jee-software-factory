@@ -28,7 +28,7 @@ Restart of the server when jenkins is installed may take a while.
 
 This playbook is configured to run locally. However it is a simplified version of a playbook which was used as a remote playbook. 
 To turn this playbook into a remote playbook remote connection: local and add a remote user. 
-Depending you ssh configuration, you may have to add some key to the user created in the playbook.
+Depending on you ssh configuration, you may have to add some key to the user created in the playbook.
 
 
 <pre><code>- name: ssh config for tomcat
