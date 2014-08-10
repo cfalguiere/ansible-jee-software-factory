@@ -15,5 +15,8 @@
   user: tomcat
   roles:
      - maven
+     - git
+#     - jee-server
+#     - smoke_test
 
 
