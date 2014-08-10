@@ -15,8 +15,11 @@ Please feel free to adapt this script to you needs and contribute if you mind.
 
 This playbook has been tested on a Precise64 box.
 
+Prerequisites : Ansible, Ubuntu (vagrant image precise64)
 
 ### Run playbook
+
+Login to the server 
 
 <pre><code>$ cd playbook-sf
 $ ansible-playbook -i site-inventory site.yml </code></pre>
