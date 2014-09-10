@@ -7,6 +7,8 @@
   user: root
   roles:
      - common
+  vars_files:
+    - group_vars/software-factory
 
 
 - hosts: software-factory
@@ -18,5 +20,7 @@
      - git
      - jee-server
      - smoke_test
+  vars_files:
+    - group_vars/software-factory
 
 
