@@ -1,0 +1,19 @@
+---
+# install tomcat
+- name: Lookup tomcat variables
+  include_vars: tomcat.yml
+
+- name: Install Java 1.7
+  apt: pkg=openjdk-7-jdk state=present
+
+- name: Install Tomcat 7
+  apt: pkg={{ item }} state=present
+  with_items:
+	- tomcat7
+	- tomcat7-admin 
+	- tomcat7-examples
+
+
+- name: Configure Tomcat users
+  template: src=tomcat-users.xml dest=/etc/tomcat7
+
