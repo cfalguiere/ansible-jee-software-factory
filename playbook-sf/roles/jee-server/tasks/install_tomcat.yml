@@ -6,44 +6,14 @@
 - name: Install Java 1.7
   apt: pkg=openjdk-7-jdk state=present
 
-- name: env
-  debug: msg="version={{tomcat_version}} bundle name={{tomcat.bundle_name}} tomcat_home={{tomcat.home}}"
+- name: Install Tomcat 7
+  apt: pkg={{ item }} state=present
+  with_items:
+	- tomcat7
+	- tomcat7-admin 
+	- tomcat7-examples
 
-- name: Download Tomcat
-  get_url: url={{tomcat.download_url}}  
-           dest=/tmp/{{tomcat.bundle_name}}.tar.gz
-
-- name: Extract archive
-  sudo: true
-  command: chdir=/opt 
-           /bin/tar xvf /tmp/{{tomcat.bundle_name}}.tar.gz 
-           creates={{tomcat.home}}
- 
-- name: Change ownership of Tomcat installation
-  file: path={{tomcat.home}} owner=tomcat group=tomcat state=directory recurse=yes
-
-- name: Prepare configuration directory
-  file: path={{tomcat.home}}/conf/ state=directory mode=0755
-
-- name: Configure Tomcat server
-  template: src=server.xml dest={{tomcat.home}}/conf/ 
 
 - name: Configure Tomcat users
-  template: src=tomcat-users.xml dest={{tomcat.home}}/conf/
+  template: src=tomcat-users.xml dest=/etc/tomcat7
 
-#- name: Symlink install directory
-#  file: src={{tomcat.home}} path=/usr/share/tomcat state=link
-
-- name: Install Tomcat init script
-  template: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
-  notify: restart tomcat
-
-# Allow all access to tcp port http and https
-#- name: Enable UFW
-#  ufw: state=enabled policy=allow
-
-#- name: Open http port
-#  ufw: rule=allow port={{http_port}} proto=tcp
-
-#- name: Open https port
-#  ufw: rule=allow port={{https_port}} proto=tcp
